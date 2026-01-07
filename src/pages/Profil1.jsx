@@ -1,7 +1,15 @@
-import { useTranslation } from "react-i18next";
+/**
+ * komponen halaman profil perusahaan yang menampilkan sejarah, visi-misi, dan pencapaian.
+ * menggunakan tata letak timeline vertikal untuk menampilkan perjalanan waktu (milestones).
+ * * @component
+ * @param {object} props - properti komponen.
+ * @param {function} props.setActivePage - fungsi untuk mengatur status halaman aktif dalam aplikasi.
+ */
 
-// Data Milestone statis disederhanakan hanya untuk tahun dan nomor kartu,
-// karena I18N key untuk deskripsi dan judulnya sama untuk semua item.
+import { useTranslation } from "react-i18next";
+import CTASection from "../components/CTASection";
+
+/** * data statis untuk mendefinisikan tahun dan nomor urut kartu pada bagian sejarah. */
 const milestonesData = [
   { tahun: "2015", card_number: 1 },
   { tahun: "2018", card_number: 2 },
@@ -10,30 +18,30 @@ const milestonesData = [
 ];
 
 export default function Profil1({ setActivePage }) {
-  // Gunakan hook useTranslation dan tentukan namespace 'profil'
+  /** * inisialisasi hook lokalisasi menggunakan namespace 'profil'. */
   const { t } = useTranslation("profil");
 
-  // Membagi data menjadi Kolom Kiri (indeks genap) dan Kolom Kanan (indeks ganjil)
-  const leftMilestones = milestonesData.filter((_, index) => index % 2 === 0); // Item 1 (2015), Item 3 (2020)
-  const rightCards = milestonesData.filter((_, index) => index % 2 !== 0); // Item 2 (2018), Item 4 (2023)
+  /** * memisahkan data milestones untuk kebutuhan rendering kolom kiri dan kanan secara spesifik. */
+  const leftMilestones = milestonesData.filter((_, index) => index % 2 === 0);
+  const rightCards = milestonesData.filter((_, index) => index % 2 !== 0);
 
-  /* --- KOMPONEN REUSABLE UNTUK MENJAGA KEBERSIHAN KODE --- */
-
-  // Komponen untuk Milestone Kiri (Teks dan Tahun)
+  /**
+   * sub-komponen untuk merender konten teks milestone di sisi kiri timeline.
+   * @param {object} data - objek data milestone tunggal.
+   * @param {number} index - indeks urutan item.
+   * @param {number} totalLeft - total jumlah item di kolom kiri.
+   */
   const MilestoneLeft = ({ data, index, totalLeft }) => {
-    // Tiga item kiri (2015, 2020) menggunakan margin bawah statis, kecuali item terakhir.
     const isLastItem = index === totalLeft - 1;
-    // Menggunakan margin/jarak besar yang Anda berikan di desain awal
     const itemClassName = index < totalLeft - 1 ? "mb-64 md:mb-44" : "";
-    const itemMarginTop = index === 0 ? "mt-5" : ""; // Margin atas untuk item 2015 sesuai desain
+    const itemMarginTop = index === 0 ? "mt-5" : "";
 
-    // Fungsi untuk mengurus navigasi (dipertahankan agar konsisten dengan SPA jika dipakai)
+    /** * fungsi internal untuk mengurus navigasi dan reset posisi scroll. */
     const handleNavigation = (pageIdentifier) => {
       window.scrollTo(0, 0);
       if (setActivePage) {
         setActivePage(pageIdentifier);
       } else {
-        // Fallback atau aksi default jika bukan SPA
         console.warn(`Navigasi ke halaman: ${pageIdentifier}`);
       }
     };
@@ -49,12 +57,15 @@ export default function Profil1({ setActivePage }) {
     );
   };
 
-  // Komponen untuk Card Milestone Kanan
+  /**
+   * sub-komponen untuk merender kartu informasi milestone di sisi kanan timeline.
+   * @param {object} data - objek data milestone tunggal.
+   * @param {number} index - indeks urutan kartu.
+   * @param {number} totalRight - total jumlah kartu di kolom kanan.
+   */
   const MilestoneRight = ({ data, index, totalRight }) => {
-    // Card 1, 2, 3 menggunakan pb-36. Card 4 menggunakan pb-28.
     const isLastItem = index === totalRight - 1;
     const cardPadding = isLastItem ? "pb-28" : "pb-36";
-    // Nomor kartu 1, 2, 3, 4 disesuaikan. Kita hanya merender kartu genap di sini.
 
     return (
       <div
@@ -80,11 +91,10 @@ export default function Profil1({ setActivePage }) {
 
   return (
     <div className="space-y-16">
-      {/* hero */}
+      {/** bagian hero yang mencakup navigasi breadcrumb dan ringkasan profil perusahaan */}
       <section>
-        <div className="grid grid-cols-2">
-          {/* text kiri */}
-          <div className="max-w-xl mx-auto pt-10 px-4 md:px-5">
+        <div className="grid grid-cols-2 gap-x-20">
+          <div className="max-w-lg mx-auto pt-10 px-5">
             <div className="mb-6 text-base">
               <button
                 onClick={() => handleNavigation("Beranda")}
@@ -106,8 +116,8 @@ export default function Profil1({ setActivePage }) {
               {t("hero_deskripsi")}
             </p>
           </div>
-          {/* gambar kanan */}
-          <div className="relative flex justify-center items-center w-full h-auto md:h-[500px] overflow-hidden">
+          {/** visual hero dengan komposisi gambar latar dan gambar */}
+          <div className="relative flex w-full h-auto md:h-[500px]">
             <img
               src="image 6.png"
               alt=""
@@ -116,14 +126,15 @@ export default function Profil1({ setActivePage }) {
             <img
               src="image 2.png"
               alt=""
-              className="z-10 w-auto h-full sm:h-80 md:h-[600px] md:-translate-x-10"
+              className="z-10 w-auto h-full md:-translate-x-10"
             />
           </div>
         </div>
       </section>
-      {/* konten */}
+
+      {/** bagian konten untuk menyajikan nilai-nilai inti, visi, dan misi perusahaan */}
       <section className="space-y-16 mb-3">
-        {/* profil perusahaan */}
+        {/** profil perusahaan yang menjelaskan mengenai identitas organisasi */}
         <div className="relative max-w-6xl mx-auto px-4 space-y-10">
           <div className="flex items-center justify-center max-w-screen">
             <div className="max-w-6xl text-center leading-tight space-y-3">
@@ -136,7 +147,7 @@ export default function Profil1({ setActivePage }) {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-2 max-w-4xl mx-auto">
-            {/* text kiri: Nilai & Visi */}
+            {/** daftar nilai-nilai perusahaan dan visi perusahaan */}
             <div className="flex flex-col gap-2">
               <div className="bg-white rounded-2xl shadow-[inset_-3px_0_1px_rgba(0,0,0,0.3)] p-6 pb-28">
                 <h3 className="font-semibold text-xl">{t("nilai_judul")} </h3>
@@ -173,7 +184,7 @@ export default function Profil1({ setActivePage }) {
                 <p className="text-gray-700 mt-2">{t("visi_deskripsi")}</p>
               </div>
             </div>
-            {/* text kanan: Gambar & Misi */}
+            {/** memadukan aset visual (gambar) dengan daftar misi perusahaan */}
             <div className="flex flex-col gap-2">
               <img
                 src="image 1.png"
@@ -214,7 +225,7 @@ export default function Profil1({ setActivePage }) {
           </div>
         </div>
 
-        {/* sejarah perusahaan (Milestone Timeline) */}
+        {/** sejarah perusahaan yang mencakup implementasi timeline */}
         <div className="relative max-w-6xl mx-auto px-4 space-y-10">
           <div className="flex items-center justify-center max-w-screen">
             <div className="max-w-6xl text-center leading-tight space-y-3">
@@ -227,9 +238,9 @@ export default function Profil1({ setActivePage }) {
             </div>
           </div>
           <div className="grid grid-cols-[1fr_0.1fr_1fr] max-w-4xl mx-auto gap-8">
-            {/* Kolom kiri (Milestone genap: 2015, 2020) */}
+            {/** label tahun dan judul milestone perusahaan */}
             <div className="flex flex-col text-right">
-              {/* Kami menggunakan 4 item untuk mereplikasi struktur dari desain asli */}
+              {/** item 1 */}
               <div className="mt-5 mb-64 md:mb-38">
                 <h1 className="font-semibold text-5xl mb-5">
                   {milestonesData[0].tahun}
@@ -241,6 +252,7 @@ export default function Profil1({ setActivePage }) {
                   {t("sejarah_milestone_deskripsi")}
                 </p>
               </div>
+              {/** item 2 */}
               <div className="mb-64 md:mb-38">
                 <h1 className="font-semibold text-5xl mb-5">
                   {milestonesData[1].tahun}
@@ -252,6 +264,7 @@ export default function Profil1({ setActivePage }) {
                   {t("sejarah_milestone_deskripsi")}
                 </p>
               </div>
+              {/** item 3 */}
               <div className="mb-64 md:mb-38">
                 <h1 className="font-semibold text-5xl mb-5">
                   {milestonesData[2].tahun}
@@ -263,6 +276,7 @@ export default function Profil1({ setActivePage }) {
                   {t("sejarah_milestone_deskripsi")}
                 </p>
               </div>
+              {/** item 4 */}
               <div>
                 <h1 className="font-semibold text-5xl mb-5">
                   {milestonesData[3].tahun}
@@ -276,11 +290,11 @@ export default function Profil1({ setActivePage }) {
               </div>
             </div>
 
-            {/* garis vertikal (Timeline Line) DENGAN GARIS HORIZONTAL SEBAGAI MARKER */}
+            {/** garis vertikal dengan elemen visual yang membatasi timeline dengan marker penanda (tick) */}
             <div className="relative flex justify-center">
-              {/* Garis Vertikal */}
+              {/** garis latar belakang */}
               <div className="absolute top-0 bottom-0 w-0.5 bg-gray-300 z-0" />
-              {/* Marker Garis Horizontal */}
+              {/** sekumpulan marker hitam untuk menandai titik waktu tertentu pada garis */}
               <div className="space-y-50">
                 {" "}
                 <div className="absolute top-7 bottom-0 w-0.5 h-50 bg-black z-10"></div>
@@ -290,9 +304,9 @@ export default function Profil1({ setActivePage }) {
               </div>
             </div>
 
-            {/* Kolom kanan (Card Milestone) */}
+            {/** kolom kanan yang memuat card informasi dengan angka urutan di latar belakang */}
             <div className="flex flex-col justify-between space-y-4">
-              {/* card 1 */}
+              {/** milestone 1 */}
               <div className="relative bg-white rounded-2xl shadow-[inset_3px_0_1px_rgba(0,0,0,0.3)] p-6 pb-36">
                 <h6 className="relative font-semibold text-xl z-10">
                   {t("sejarah_card_judul", { replace: { "\n": "\n" } })}
@@ -304,7 +318,7 @@ export default function Profil1({ setActivePage }) {
                   1
                 </p>
               </div>
-              {/* card 2 */}
+              {/** milestone 2 */}
               <div className="relative bg-white rounded-2xl shadow-[inset_3px_0_1px_rgba(0,0,0,0.3)] p-6 pb-36">
                 <h6 className="relative font-semibold text-xl z-10">
                   {t("sejarah_card_judul", { replace: { "\n": "\n" } })}
@@ -316,7 +330,7 @@ export default function Profil1({ setActivePage }) {
                   2
                 </p>
               </div>
-              {/* card 3 */}
+              {/** milestone 3 */}
               <div className="relative bg-white rounded-2xl shadow-[inset_3px_0_1px_rgba(0,0,0,0.3)] p-6 pb-36">
                 <h6 className="relative font-semibold text-xl z-10">
                   {t("sejarah_card_judul", { replace: { "\n": "\n" } })}
@@ -328,7 +342,7 @@ export default function Profil1({ setActivePage }) {
                   3
                 </p>
               </div>
-              {/* card 4 */}
+              {/** milestone 4 */}
               <div className="relative bg-white rounded-2xl shadow-[inset_3px_0_1px_rgba(0,0,0,0.3)] p-6 pb-28">
                 <h6 className="relative font-semibold text-xl z-10">
                   {t("sejarah_card_judul", { replace: { "\n": "\n" } })}
@@ -344,14 +358,12 @@ export default function Profil1({ setActivePage }) {
           </div>
         </div>
 
-        {/* struktur perusahaan */}
+        {/** struktur perusahaan yang menampilkan bagan organisasi dalam format gambar */}
         <div className="relative max-w-6xl mx-auto px-4 space-y-10">
           <div className="flex items-center justify-center max-w-screen">
             <div className="max-w-6xl text-center leading-tight space-y-3">
               <h2 className="text-4xl max-w-2xl font-semibold mx-auto">
                 {t("struktur_judul")}
-                <br />
-                PT Pegiat Ekspor Nusantara
               </h2>
               <p className="text-gray-600 max-w-xl mx-auto">
                 {t("struktur_deskripsi")}
@@ -362,7 +374,8 @@ export default function Profil1({ setActivePage }) {
             <img src="image 1.png" className="rounded-2xl" alt="" />
           </div>
         </div>
-        {/* pencapian perusahaan */}
+
+        {/** pencapaian perusahaan yang memuat galeri horizontal (carousel) untuk menampilkan sertifikat atau pencapaian perusahaan */}
         <div className="relative max-w-6xl mx-auto px-4 space-y-10">
           <div className="flex items-center justify-center max-w-screen">
             <div className="max-w-6xl text-center leading-tight space-y-3">
@@ -380,6 +393,7 @@ export default function Profil1({ setActivePage }) {
             className="flex gap-4 items-end overflow-x-auto p-2"
             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
           >
+            {/** card 1 */}
             <div className="relative max-w-72 shrink-0">
               <img
                 src="image 1.png"
@@ -392,6 +406,7 @@ export default function Profil1({ setActivePage }) {
                 </h2>
               </div>
             </div>
+            {/** card 2 */}
             <div className="flex flex-col max-w-72 shrink-0">
               <div className="relative text-blue-950">
                 <h2 className="text-9xl font-bold">2025</h2>
@@ -409,6 +424,7 @@ export default function Profil1({ setActivePage }) {
                 </div>
               </div>
             </div>
+            {/** card 3 */}
             <div className="relative max-w-72 shrink-0">
               <img
                 src="image 1.png"
@@ -421,6 +437,7 @@ export default function Profil1({ setActivePage }) {
                 </h2>
               </div>
             </div>
+            {/** card 4 */}
             <div className="relative max-w-72 shrink-0">
               <img
                 src="image 1.png"
@@ -435,7 +452,8 @@ export default function Profil1({ setActivePage }) {
             </div>
           </div>
         </div>
-        {/* pencapian perusahaan */}
+
+        {/** komitmen perusahaan pada bagian akhir yang menampilkan komitmen perusahaan */}
         <div className="relative max-w-6xl mx-auto px-4 space-y-10">
           <div className="flex items-center justify-center max-w-screen">
             <div className="max-w-6xl text-center leading-tight space-y-3">
@@ -448,9 +466,9 @@ export default function Profil1({ setActivePage }) {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-10 items-center">
-            {/* kolom kiri */}
+            {/** bentuk komitmen organisasi. */}
             <div className="relative space-y-4">
-              {/* item 1 */}
+              {/** item 1 */}
               <div className="border-l-2 border-gray-400">
                 <div className="relative pl-6 py-4 rounded-lg cursor-pointer transition-all duration-300 hover:bg-blue-50 group">
                   <div className="absolute left-0 top-0 h-full w-[3px] bg-transparent rounded-full transition-all duration-300 group-hover:bg-blue-900" />
@@ -462,7 +480,7 @@ export default function Profil1({ setActivePage }) {
                   </p>
                 </div>
               </div>
-              {/* item 2 */}
+              {/** item 2 */}
               <div className="border-l-2 border-gray-400">
                 <div className="relative pl-6 py-4 rounded-lg cursor-pointer transition-all duration-300 hover:bg-blue-50 group">
                   <div className="absolute left-0 top-0 h-full w-[3px] bg-transparent rounded-full transition-all duration-300 group-hover:bg-blue-900" />
@@ -474,7 +492,7 @@ export default function Profil1({ setActivePage }) {
                   </p>
                 </div>
               </div>
-              {/* item 3 */}
+              {/** item 3 */}
               <div className="border-l-2 border-gray-400">
                 <div className="relative pl-6 py-4 rounded-lg cursor-pointer transition-all duration-300 hover:bg-blue-50 group">
                   <div className="absolute left-0 top-0 h-full w-[3px] bg-transparent rounded-full transition-all duration-300 group-hover:bg-blue-900" />
@@ -487,7 +505,7 @@ export default function Profil1({ setActivePage }) {
                 </div>
               </div>
             </div>
-            {/* Bagian kanan */}
+            {/** bagian kanan yang memuat visualisasi menggunakan tumpukan gambar (layered images) */}
             <div className="relative">
               <img
                 src="image 8.png"
@@ -504,6 +522,7 @@ export default function Profil1({ setActivePage }) {
             </div>
           </div>
         </div>
+        <CTASection />
       </section>
     </div>
   );
