@@ -1,9 +1,8 @@
-// src/i18n.js (HANYA KODE JAVASCRIPT KONFIGURASI)
+// src/i18n.js
 
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
 
-// ➡️ DEFINISIKAN SEMUA DATA TERJEMAHAN DI SINI
 const resources = {
   // === BAHASA INDONESIA (IDN) ===
   idn: {
@@ -79,41 +78,35 @@ const resources = {
         "Program Pengembangan Bisnis yang Terintegrasi Bersama PT Pegiat Ekspor Nusantara",
       hero_subtitle:
         "Menyediakan berbagai program pengembangan bisnis untuk memperkuat daya saing produk lokal di pasar insternasional",
-      section_title_1: "Program Pengembangan Bisnis",
-      section_title_1_bold: "PT.Pegiat Ekspor Nusantara",
+      section_title_1: "Program Pengembangan Bisnis PT.Pegiat Ekspor Nusantara",
       section_subtitle_1:
         "Menyediakan berbagai program pengembangan bisnis untuk memperkuat daya saing produk lokal di pasar insternasional",
       program_card_title:
         "Seminar Pengembangan Bisnis PT.Pegiat Ekspor Nusantara",
       program_card_date_1: "25 September 2025",
       program_card_date_2: "10 Oktober 2025",
-      section_title_2: "Informasi dan Pengumuman Program",
-      section_title_2_bold: "PT.Pegiat Ekspor Nusantara",
+      section_title_2:
+        "Informasi dan Pengumuman Program PT.Pegiat Ekspor Nusantara",
       section_subtitle_2:
         "Memberikan informasi program pengembangan bisnis PT Pegiat Ekspor Nusantara",
       footer_note:
         "**Syarat dan ketentuan pengumuman atau informasi program di publikasikan",
     },
     keanggotaan: {
-      // Hero Section
       judul_hero:
         "Tingkatkan Keanggotaan untuk Akses Layanan Profesional PT Pegiat Ekspor Nusantara",
       deskripsi_hero:
         "Keanggotaan memberikan akses terstruktur bagi mitra untuk memperoleh layanan, informasi, dan dukungan profesional untuk mendorong kolaborasi bisnis di sektor ekspor",
-      // Rincian Keanggotaan
       rincian_judul: "Program Keanggotaan Menuju Kolaborasi Profesional",
       rincian_deskripsi:
         "Keanggotaan memberikan akses terstruktur bagi mitra untuk memperoleh layanan, informasi, dan dukungan profesional yang dirancang untuk mendorong kolaborasi dan pertumbuhan bisnis di sektor ekspor",
       btn_selengkapnya: "Selengkapnya",
-      // Jenis Keanggotaan
-      jenis_judul: "Bentuk Keanggotaan",
-      jenis_judul_perusahaan: "PT Pegiat Ekspor Nusantara",
+      jenis_judul: "Bentuk Keanggotaan PT Pegiat Ekspor Nusantara",
       jenis_deskripsi:
         "Keanggotaan memberikan akses terstruktur bagi mitra untuk mendorong kolaborasi bisnis di sektor ekspor",
       kartu_konsultasi_judul: "Konsultasi Profesional",
       kartu_konsultasi_deskripsi:
         "Keanggotaan Konsultasi Ekspor tersedia dalam beberapa tingkat yang dirancang untuk menyesuaikan kebutuhan bagi mitra",
-      // Keuntungan Keanggotaan
       keuntungan_judul: "Keuntungan Keanggotaan",
       keuntungan_deskripsi:
         "Keanggotaan memberikan akses terstruktur bagi mitra untuk mendorong kolaborasi bisnis di sektor ekspor",
@@ -121,12 +114,11 @@ const resources = {
         "Anggota mendapatkan akses prioritas dan dukungan profesional yang memperkuat pengembangan bisnis.",
       keuntungan_card_2_deskripsi:
         "Untuk dapat memperoleh seluruh keuntungan keanggotaan, pengguna diharapkan melakukan registrasi ulang melalui prosedur yang telah ditentukan",
-      // Skema Keanggotaan
-      skema_judul: "Skema Keanggotaan",
+      skema_judul: "Skema Keanggotaan PT. Pegiat Ekspor Nusantara",
       skema_deskripsi:
         "Keanggotaan memberikan akses terstruktur bagi mitra untuk mendorong kolaborasi bisnis di sektor ekspor",
-      // Perbandingan Kompetitor / Syarat & Ketentuan (Tabel)
-      tabel_syarat_judul: "Syarat dan Ketentuan Keanggotaan",
+      tabel_syarat_judul:
+        "Syarat dan Ketentuan Keanggotaan PT Pegiat Ekspor Nusantara",
       tabel_keunggulan_judul: "Keunggulan Layanan PT Pegiat Ekspor Nusantara",
       tabel_deskripsi:
         "Keanggotaan memberikan akses terstruktur bagi mitra untuk mendorong kolaborasi bisnis di sektor ekspor",
@@ -139,11 +131,9 @@ const resources = {
         "Memperkuat daya saing melalui jaringan strategis yang mendukung PT. Pegiat Ekspor Nusantara",
     },
     bantuan: {
-      // Hero Section
       judul_hero: "Dukungan dan Bantuan Layanan PT Pegiat Ekspor Nusantara",
       deskripsi_hero:
         "Membantu anda dalam menemukan solusi mengenai sistem layanan PT Pegiat Ekspor Nusantara",
-      // FAQ Section
       faq_judul: "Pertanyaan yang diajukan Terkait Aplikasi",
       faq_data: [
         {
@@ -193,7 +183,6 @@ const resources = {
           "Menyajikan berita terkini seputar PT Pegiat Ekspor Nusantara dengan memastikan pembaruan informasi",
       },
 
-      // Data dinamis untuk Berita Terkini/Rekomendasi (disesuaikan agar konsisten)
       berita_rekomendasi: [
         {
           id: 1,
@@ -219,8 +208,8 @@ const resources = {
     },
     layanan: {
       hero: {
-        judul_utama_1: "Layanan Ekspor Profesional Bersama",
-        judul_utama_2: "PT. Pegiat Ekspor Nusantara",
+        judul_utama_1:
+          "Layanan Ekspor Profesional Bersama PT. Pegiat Ekspor Nusantara",
         deskripsi:
           "Meningkatkan pemahaman ekspor melalui layanan profesional untuk mendukung produk lokal menembus pasar internasional",
       },
@@ -308,7 +297,7 @@ const resources = {
       sejarah_card_deskripsi:
         "PT Pegiat Ekspor Nusantara mencatat peningkatan kapasitas operasional sebesar 35% dan berhasil memperluas layanan ke 12 kota baru di wilayah Jawa Timur",
 
-      struktur_judul: "Struktur Organisasi",
+      struktur_judul: "Struktur Organisasi PT Pegiat Ekspor Nusantara",
       struktur_deskripsi:
         "Struktur perusahaan menggambarkan tata kelola dan susunan organisasi yang memastikan setiap fungsi berjalan sesuai tujuan perusahaan",
 
@@ -335,17 +324,14 @@ const resources = {
         "PT Pegiat Ekspor Nusantara berusaha meningkatkan daya saing produk lokal melalui dukungan terhadap pelaku usaha",
     },
     berita: {
-      // Hero Section
       judul_hero: "Menghadirkan Berita Seputar PT Pegiat Ekspor Nusantara",
       deskripsi_hero:
         "Menyajikan berita terkini seputar PT Pegiat Ekspor Nusantara dengan memastikan pembaruan informasi",
 
-      // News Content Section
       judul_konten: "Menghadirkan Informasi Seputar PT Pegiat Ekspor Nusantara",
       deskripsi_konten:
         "Menyajikan berita terkini seputar PT Pegiat Ekspor Nusantara dengan memastikan pembaruan informasi",
 
-      // Data Kartu Berita (Dinamis - 6 item)
       news_data: [
         {
           id: 1,
@@ -385,10 +371,9 @@ const resources = {
         },
       ],
 
-      // Tombol "Lihat Selengkapnya"
       btn_lihat_selengkapnya: "Lihat Selengkapnya",
       btn_tutup: "Tutup",
-      btn_read_more: "Baca Selengkapnya", // Untuk link detail berita
+      btn_read_more: "Baca Selengkapnya",
     },
     banner: {
       banner_judul:
@@ -397,7 +382,6 @@ const resources = {
         "Mendukung bisnis anda menembus pasar internasional dengan dukungan layanan ekspor yang profesional",
     },
     footer: {
-      // ⬅️ NAMESPACE BARU: FOOTER IDN
       tagline: "Dari Nusantara untuk Dunia — Bersama PENS, Ekspor Jadi Nyata",
       judul_kontak: "Kontak",
       judul_layanan: "Layanan",
@@ -489,41 +473,36 @@ const resources = {
         "Integrated Business Development Program with PT Pegiat Ekspor Nusantara",
       hero_subtitle:
         "Providing various business development programs to strengthen the competitiveness of local products in international markets",
-      section_title_1: "Business Development Program",
-      section_title_1_bold: "PT.Pegiat Ekspor Nusantara",
+      section_title_1:
+        "Business Development Program PT.Pegiat Ekspor Nusantara",
       section_subtitle_1:
         "Providing various business development programs to strengthen the competitiveness of local products in international markets",
       program_card_title:
         "PT.Pegiat Ekspor Nusantara Business Development Seminar",
       program_card_date_1: "September 25, 2025",
       program_card_date_2: "October 10, 2025",
-      section_title_2: "Program Information and Announcement",
-      section_title_2_bold: "PT.Pegiat Ekspor Nusantara",
+      section_title_2:
+        "Program Information and Announcement PT.Pegiat Ekspor Nusantara",
       section_subtitle_2:
         "Providing information on PT Pegiat Ekspor Nusantara's business development program",
       footer_note:
         "**Terms and conditions for program announcements or information are published",
     },
     keanggotaan: {
-      // Hero Section
       judul_hero:
         "Upgrade Your Membership for Access to PT Pegiat Ekspor Nusantara Professional Services",
       deskripsi_hero:
         "Membership provides structured access for partners to obtain professional services, information, and support to encourage business collaboration in the export sector",
-      // Rincian Keanggotaan
       rincian_judul: "Membership Program towards Professional Collaboration",
       rincian_deskripsi:
         "Membership provides structured access for partners to obtain professional services, information, and support designed to encourage collaboration and business growth in the export sector",
       btn_selengkapnya: "Read More",
-      // Jenis Keanggotaan
-      jenis_judul: "Membership Types",
-      jenis_judul_perusahaan: "PT Pegiat Ekspor Nusantara",
+      jenis_judul: "Membership Types PT Pegiat Ekspor Nusantara",
       jenis_deskripsi:
         "Membership provides structured access for partners to encourage business collaboration in the export sector",
       kartu_konsultasi_judul: "Professional Consultation",
       kartu_konsultasi_deskripsi:
         "Export Consultation Membership is available in several levels designed to adapt to the needs of partners",
-      // Keuntungan Keanggotaan
       keuntungan_judul: "Membership Benefits",
       keuntungan_deskripsi:
         "Membership provides structured access for partners to encourage business collaboration in the export sector",
@@ -531,11 +510,9 @@ const resources = {
         "Members get priority access and professional support that strengthens business development.",
       keuntungan_card_2_deskripsi:
         "To obtain all membership benefits, users are expected to re-register through the specified procedure",
-      // Skema Keanggotaan
-      skema_judul: "Membership Scheme",
+      skema_judul: "Membership Scheme PT Pegiat Ekspor Nusantara",
       skema_deskripsi:
         "Membership provides structured access for partners to encourage business collaboration in the export sector",
-      // Perbandingan Kompetitor / Syarat & Ketentuan (Tabel)
       tabel_syarat_judul: "Membership Terms and Conditions",
       tabel_keunggulan_judul:
         "Advantages of PT Pegiat Ekspor Nusantara Services",
@@ -550,11 +527,9 @@ const resources = {
         "Strengthening competitiveness through a strategic network that supports PT. Pegiat Ekspor Nusantara",
     },
     bantuan: {
-      // Hero Section
       judul_hero: "Support and Help Services of PT Pegiat Ekspor Nusantara",
       deskripsi_hero:
         "Helping you find solutions regarding the service system of PT Pegiat Ekspor Nusantara",
-      // FAQ Section
       faq_judul: "Frequently Asked Questions Regarding the Application",
       faq_data: [
         {
@@ -603,7 +578,6 @@ const resources = {
           "Presenting the latest news about PT Pegiat Ekspor Nusantara while ensuring information updates",
       },
 
-      // Data dinamis untuk Berita Terkini/Rekomendasi (disesuaikan agar konsisten)
       berita_rekomendasi: [
         {
           id: 1,
@@ -629,8 +603,8 @@ const resources = {
     },
     layanan: {
       hero: {
-        judul_utama_1: "Professional Export Services with",
-        judul_utama_2: "PT. Pegiat Ekspor Nusantara",
+        judul_utama_1:
+          "Professional Export Services with PT. Pegiat Ekspor Nusantara",
         deskripsi:
           "Improving export understanding through professional services to support local products penetrate international markets",
       },
@@ -718,7 +692,7 @@ const resources = {
       sejarah_card_deskripsi:
         "PT Pegiat Ekspor Nusantara recorded a 35% increase in operational capacity and successfully expanded services to 12 new cities in the East Java region",
 
-      struktur_judul: "Organizational Structure",
+      struktur_judul: "Organizational Structure PT Pegiat Ekspor Nusantara",
       struktur_deskripsi:
         "The company structure describes the governance and organizational arrangement that ensures every function runs according to company goals",
 
@@ -745,17 +719,14 @@ const resources = {
         "PT Pegiat Ekspor Nusantara strives to increase the competitiveness of local products through support for business actors",
     },
     berita: {
-      // Hero Section
       judul_hero: "Presenting News about PT Pegiat Ekspor Nusantara",
       deskripsi_hero:
         "Presenting the latest news about PT Pegiat Ekspor Nusantara while ensuring information updates",
 
-      // News Content Section
       judul_konten: "Presenting Information about PT Pegiat Ekspor Nusantara",
       deskripsi_konten:
         "Presenting the latest news about PT Pegiat Ekspor Nusantara while ensuring information updates",
 
-      // Data Kartu Berita (Dinamis - 6 item)
       news_data: [
         {
           id: 1,
@@ -796,10 +767,9 @@ const resources = {
         },
       ],
 
-      // Tombol "Lihat Selengkapnya"
       btn_lihat_selengkapnya: "View More",
       btn_tutup: "Close",
-      btn_read_more: "Read More", // Untuk link detail berita
+      btn_read_more: "Read More",
     },
     banner: {
       banner_judul:
@@ -808,7 +778,6 @@ const resources = {
         "Support your business to penetrate the international market with professional export service support",
     },
     footer: {
-      // NAMESPACE BARU: FOOTER ENG
       tagline:
         "From Nusantara to the World — With PENS, Export Becomes Reality",
       judul_kontak: "Contact",
