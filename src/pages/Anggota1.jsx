@@ -80,7 +80,7 @@ export default function Anggota1({ setActivePage }) {
       <section>
         <div className="grid grid-cols-2 gap-x-20">
           {/* breadcrump */}
-          <div className="max-w-xl mx-auto pt-10 px-4 md:px-5">
+          <div className="max-w-xl mx-auto pt-10 px-10">
             <div className="mb-6 text-base">
               <button
                 onClick={() => handleNavigation("Beranda")}
@@ -439,4 +439,3 @@ export default function Anggota1({ setActivePage }) {
     </div>
   );
 }
-
