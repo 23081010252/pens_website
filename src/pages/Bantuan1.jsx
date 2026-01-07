@@ -1,18 +1,34 @@
-// bantuan1.jsx
+/**
+ * komponen halaman bantuan yang menampilkan informasi faq (frequently asked questions).
+ * memiliki fitur hero section dan sistem akordion interaktif untuk daftar pertanyaan.
+ * * @component
+ * @param {object} props - properti komponen.
+ * @param {function} props.setActivePage - fungsi untuk mengatur navigasi halaman aktif.
+ * * @description
+ * komponen ini mengelola dua namespace i18n:
+ * 1. 'bantuan': untuk konten judul, deskripsi, dan data faq.
+ * 2. 'header': untuk melokalisasi teks pada elemen breadcrumb.
+ * menggunakan state internal untuk menangani interaksi buka-tutup pada daftar pertanyaan.
+ */
 
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next"; // ⬅️ Import useTranslation
+import { useTranslation } from "react-i18next";
+import CTASection from "../components/CTASection";
 
 export default function Bantuan1({ setActivePage }) {
-  // ⬅️ Gunakan namespace "bantuan" untuk konten utama
+  /** * hook translasional untuk namespace utama 'bantuan'. */
   const { t } = useTranslation("bantuan");
-  // Dapatkan t dari namespace "header" untuk breadcrumb
+
+  /** * hook translasional untuk namespace 'header' guna mendukung breadcrumb. */
   const { t: tHeader } = useTranslation("header");
 
-  // 1. State untuk mengelola item accordion mana yang sedang terbuka
+  /** * state untuk menyimpan id item faq yang sedang terbuka. bernilai null jika semua tertutup. */
   const [openItem, setOpenItem] = useState(null);
 
-  // Fungsi untuk menangani navigasi (jika ini bagian dari Single Page Application)
+  /**
+   * mengelola perpindahan halaman, meriset posisi scroll ke atas, dan memicu setter halaman aktif.
+   * @param {string} pageIdentifier - identitas halaman tujuan.
+   */
   const handleNavigation = (pageIdentifier) => {
     window.scrollTo(0, 0);
     if (setActivePage) {
@@ -22,23 +38,25 @@ export default function Bantuan1({ setActivePage }) {
     }
   };
 
-  // 2. Fungsi untuk mengalihkan status accordion
+  /**
+   * mengubah status terbuka/tertutup pada item akordion faq.
+   * @param {number|string} id - identitas unik item faq.
+   */
   const toggleAccordion = (id) => {
     setOpenItem(openItem === id ? null : id);
   };
 
-  // 3. Ambil data FAQ dari i18n
+  /** * mengambil data array objek faq dari file lokalisasi menggunakan opsi returnObjects. */
   const faqData = t("faq_data", { returnObjects: true });
 
   return (
     <div className="space-y-16">
-      {/* hero */}
+      {/** bagian hero: menampilkan breadcrumb dan informasi pengantar halaman. */}
       <section>
-        <div className="grid grid-cols-2">
-          {/* text kiri */}
+        <div className="grid grid-cols-2 gap-x-20">
           <div className="max-w-xl mx-auto pt-10 px-4 md:px-5">
             <div className="mb-6 text-base">
-              {/* Breadcrumb - menggunakan tHeader */}
+              {/** navigasi breadcrumb menggunakan teks dari i18n header. */}
               <button
                 onClick={() => handleNavigation("beranda")}
                 className="text-gray-500 hover:text-gray-700"
@@ -53,13 +71,13 @@ export default function Bantuan1({ setActivePage }) {
               </button>
             </div>
             <h1 className="text-4xl md:text-5xl font-semibold mb-4 leading-none">
-              {t("judul_hero")} {/* ⬅️ Terjemahan */}
+              {t("judul_hero")}
             </h1>
             <p className="hidden md:block text-gray-600 mb-8">
-              {t("deskripsi_hero")} {/* ⬅️ Terjemahan */}
+              {t("deskripsi_hero")}
             </p>
           </div>
-          {/* gambar kanan */}
+          {/** area visual hero dengan gambar latar dan gambar utama. */}
           <div className="relative flex justify-center items-center w-full h-auto md:h-[500px] overflow-hidden">
             <img
               src="image 6.png"
@@ -75,9 +93,8 @@ export default function Bantuan1({ setActivePage }) {
         </div>
       </section>
 
-      {/* konten */}
+      {/** bagian konten utama: merender daftar tanya jawab secara dinamis. */}
       <section className="space-y-16 mb-10">
-        {/* FAQ */}
         <div className="relative max-w-6xl mx-auto px-4 space-y-10">
           <div className="flex items-center justify-center max-w-screen">
             <div className="max-w-6xl text-center leading-tight space-y-3">
@@ -89,7 +106,7 @@ export default function Bantuan1({ setActivePage }) {
 
           <div>
             <div className="w-full space-y-3">
-              {/* Looping melalui data FAQ dari i18n */}
+              {/** iterasi data faq untuk membentuk elemen akordion. */}
               {faqData.map((item) => (
                 <div
                   key={item.id}
@@ -129,6 +146,7 @@ export default function Bantuan1({ setActivePage }) {
             </div>
           </div>
         </div>
+        <CTASection />
       </section>
     </div>
   );
