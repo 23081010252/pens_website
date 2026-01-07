@@ -54,7 +54,7 @@ export default function Bantuan1({ setActivePage }) {
       {/** bagian hero: menampilkan breadcrumb dan informasi pengantar halaman. */}
       <section>
         <div className="grid grid-cols-2 gap-x-20">
-          <div className="max-w-xl mx-auto pt-10 px-4 md:px-5">
+          <div className="max-w-xl mx-auto pt-10 px-10">
             <div className="mb-6 text-base">
               {/** navigasi breadcrumb menggunakan teks dari i18n header. */}
               <button
