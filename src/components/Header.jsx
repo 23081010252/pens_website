@@ -1,7 +1,31 @@
+/**
+ * komponen header navigasi utama dengan fitur sticky (fixed).
+ * mendukung navigasi dinamis, sistem multibahasa (i18n), dan tampilan responsif (mobile menu).
+ * * @component
+ * @param {object} props - properti komponen.
+ * @param {string} props.activePage - kunci (key) halaman yang sedang aktif saat ini.
+ * @param {function} props.setActivePage - fungsi setter untuk memperbarui halaman aktif di state utama.
+ * @param {array} [props.menuItems=defaultMenuItems] - daftar item menu yang akan ditampilkan.
+ * * @description
+ * komponen menggunakan hook `useTranslation` untuk menangani teks multibahasa.
+ * memiliki dua state internal utama:
+ * 1. `isLangMenuOpen` untuk mengontrol dropdown pilihan bahasa (id/en).
+ * 2. `isMobileMenuOpen` untuk mengontrol visibilitas menu pada layar kecil.
+ * * @example
+ * <Header activePage="Beranda" setActivePage={(key) => handlePageChange(key)} />
+ * * @returns {jsx.element} bar navigasi dengan logo, link menu dinamis, dropdown bahasa, dan menu hamburger mobile.
+ */
+
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-// menggunakan defaultMenuItems untuk memanggil key dari i18n
+/**
+ * konfigurasi standar untuk item navigasi.
+ * setiap objek berisi:
+ * - name: nama fallback (untuk referensi pengembang).
+ * - key: identitas unik untuk kontrol state aktif.
+ * - i18nKey: kunci referensi untuk mengambil teks terjemahan dari file json.
+ */
 const defaultMenuItems = [
   { name: "Beranda", key: "Beranda", i18nKey: "menu_beranda" },
   { name: "Layanan", key: "Layanan1", i18nKey: "menu_layanan" },
@@ -16,23 +40,44 @@ export default function Header({
   setActivePage,
   menuItems = defaultMenuItems,
 }) {
-  const { t, i18n } = useTranslation("header"); // memanggil fungsi terjemahan (t) dan instance i18n dari Hook
+  /** * hook untuk mengakses fungsi terjemahan dan instans i18n.
+   * menggunakan namespace "header" untuk pengelolaan teks multibahasa.
+   */
+  const { t, i18n } = useTranslation("header");
 
-  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false); // state untuk dropdown bahasa
+  /** * state boolean untuk mengontrol visibilitas menu dropdown pilihan bahasa.
+   * bernilai true jika menu terbuka, dan false jika tertutup.
+   */
+  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
 
-  const activeLang = i18n.language.toUpperCase(); // menggunakan toLocaleUpperCase() untuk memastikan output ID/EN konsisten dengan input
+  /** * mengambil kode bahasa yang sedang aktif dari i18n.
+   * diubah menjadi huruf kapital (contoh: 'ID', 'EN') untuk standarisasi tampilan ui.
+   */
+  const activeLang = i18n.language.toUpperCase();
 
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State  untuk Menu Mobile
-
+  /** * state boolean untuk mengontrol tampilan menu navigasi pada perangkat mobile.
+   * digunakan untuk menampilkan atau menyembunyikan menu hamburger.
+   */
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  /**
+   * mengubah visibilitas dropdown bahasa.
+   */
   const toggleLangMenu = () => {
     setIsLangMenuOpen(!isLangMenuOpen);
   };
 
+  /**
+   * mengubah visibilitas menu mobile dan memastikan dropdown bahasa tertutup.
+   */
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     setIsLangMenuOpen(false);
   };
 
+  /**
+   * mengubah bahasa aplikasi menggunakan instance i18n.
+   * @param {string} lang - kode bahasa (contoh: "IDN" atau "ENG").
+   */
   const changeLanguage = (lang) => {
     const lowerLang = lang.toLowerCase();
     i18n.changeLanguage(lowerLang);
@@ -40,6 +85,11 @@ export default function Header({
     setIsLangMenuOpen(false);
   };
 
+  /**
+   * menentukan kelas css berdasarkan status aktif halaman.
+   * @param {string} key - kunci halaman yang akan dicek.
+   * @returns {string} string kelas tailwind.
+   */
   const getLinkClass = (key) => {
     const baseClasses = "text-gray-700 hover:text-black cursor-pointer";
     if (activePage === key) {
@@ -48,7 +98,10 @@ export default function Header({
     return baseClasses;
   };
 
-  // melakukan update state yang akan merender halaman di App.jsx
+  /**
+   * menangani klik pada item menu untuk navigasi.
+   * @param {string} key - kunci halaman tujuan.
+   */
   const handleMenuClick = (key) => {
     setActivePage(key);
     console.log(`Navigasi ke halaman: ${key}`);
@@ -58,12 +111,13 @@ export default function Header({
     <header className="fixed top-0 w-full z-50 shadow bg-white">
       <div className="mx-auto px-4">
         <div className="flex h-16 justify-between items-center text-lg ">
+          {/* mengatur aktivasi tombol beranda saat ditekan */}
           <a
             href="#"
             className="flex items-center gap-3 cursor-pointer"
             onClick={(e) => {
               e.preventDefault();
-              setActivePage("Beranda"); // mengatur beranda menjadi halaman aktif saat logo ditekan
+              setActivePage("Beranda");
             }}
           >
             <img src="image 5.png" alt="Logo" className="h-8 z-0" />
@@ -127,7 +181,7 @@ export default function Header({
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    changeLanguage("IDN"); // Memanggil fungsi yang sudah diperbaiki
+                    changeLanguage("IDN");
                   }}
                   className={`block px-4 py-2 text-sm ${
                     activeLang === "IDN"
@@ -142,7 +196,7 @@ export default function Header({
                   href="#"
                   onClick={(e) => {
                     e.preventDefault();
-                    changeLanguage("ENG"); // Memanggil fungsi yang sudah diperbaiki
+                    changeLanguage("ENG");
                   }}
                   className={`block px-4 py-2 text-sm ${
                     activeLang === "ENG"
