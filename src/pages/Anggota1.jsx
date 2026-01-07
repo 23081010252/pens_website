@@ -1,20 +1,44 @@
-// anggota1.jsx
+/**
+ * komponen halaman keanggotaan yang menampilkan informasi detail program member.
+ * menyajikan hero section, rincian keanggotaan, jenis-jenis kartu, skema, serta tabel perbandingan manfaat.
+ * * @component
+ * @param {object} props - properti komponen.
+ * @param {function} props.setActivePage - fungsi untuk memperbarui state halaman aktif pada komponen induk.
+ * * @description
+ * komponen ini menginisialisasi dua namespace translatasi:
+ * 1. `keanggotaan`: untuk konten utama halaman.
+ * 2. `header`: khusus untuk label pada navigasi breadcrumb.
+ * dilengkapi dengan fitur smooth scroll untuk navigasi internal halaman.
+ * * @example
+ * <Anggota1 setActivePage={(page) => setPage(page)} />
+ * * @returns {jsx.element} struktur halaman lengkap dengan breadcrumb, hero image, grid informasi, dan tabel perbandingan.
+ */
 
 import React from "react";
-import { useTranslation } from "react-i18next"; // menerima data dari useTranslation
+// menerima data dari useTranslation
+import { useTranslation } from "react-i18next";
+import CTASection from "../components/CTASection";
 
 export default function Anggota1({ setActivePage }) {
-  // namespace "keanggotaan"
+  /** * hook translatasi untuk konten utama halaman keanggotaan. */
   const { t } = useTranslation("keanggotaan");
-  // menerima data t dari namespace "header" untuk breadcrumb
+
+  /** * hook translatasi untuk mengambil teks label menu dari namespace header. */
   const { t: tHeader } = useTranslation("header");
 
+  /**
+   * melakukan scroll otomatis ke elemen spesifik berdasarkan id.
+   * @param {string} id - identitas elemen html tujuan.
+   */
   const handleScroll = (id) => {
     const element = document.getElementById(id);
     element?.scrollIntoView({ behavior: "smooth" });
   };
 
-  // fungsi untuk menangani navigasi (jika ini bagian dari Single Page Application)
+  /**
+   * menangani perpindahan halaman dan meriset posisi scroll ke atas.
+   * @param {string} pageIdentifier - kunci halaman tujuan (contoh: "Beranda").
+   */
   const handleNavigation = (pageIdentifier) => {
     window.scrollTo(0, 0);
     if (setActivePage) {
@@ -24,7 +48,10 @@ export default function Anggota1({ setActivePage }) {
     }
   };
 
-  // kode SVG untuk ikon check circle
+  /**
+   * komponen internal untuk merender ikon lingkaran centang menggunakan svg.
+   * @returns {jsx.element} elemen svg ikon centang.
+   */
   const CheckCircleIcon = () => (
     <svg
       className="w-6 h-6 mx-auto"
@@ -49,33 +76,35 @@ export default function Anggota1({ setActivePage }) {
 
   return (
     <div className="space-y-16">
-      {/* hero */}
+      {/* hero banner */}
       <section>
-        <div className="grid grid-cols-2">
-          {/* text konten */}
+        <div className="grid grid-cols-2 gap-x-20">
+          {/* breadcrump */}
           <div className="max-w-xl mx-auto pt-10 px-4 md:px-5">
             <div className="mb-6 text-base">
               <button
                 onClick={() => handleNavigation("Beranda")}
                 className="text-gray-500"
               >
-                {tHeader("menu_beranda")} / {/* ⬅️ Terjemahan Header */}
+                {tHeader("menu_beranda")} /
               </button>
               <button
                 onClick={() => handleNavigation("Anggota1")}
                 className="font-bold"
               >
-                {tHeader("menu_keanggotaan")} {/* ⬅️ Terjemahan Header */}
+                {tHeader("menu_keanggotaan")}
               </button>
             </div>
+            {/* text hero banner */}
             <h1 className="text-4xl md:text-5xl font-semibold mb-4 leading-none">
-              {t("judul_hero")} {/* ⬅️ Terjemahan Keanggotaan */}
+              {t("judul_hero")}
             </h1>
             <p className="hidden md:block text-gray-600 mb-8">
-              {t("deskripsi_hero")} {/* ⬅️ Terjemahan Keanggotaan */}
+              {t("deskripsi_hero")}
             </p>
           </div>
-          {/* gambar konten */}
+
+          {/* gambar hero banner */}
           <div className="relative flex justify-center items-center w-full h-auto md:h-[500px] overflow-hidden">
             <img
               src="image 6.png"
@@ -91,18 +120,20 @@ export default function Anggota1({ setActivePage }) {
         </div>
       </section>
 
-      {/* konten (Diterjemahkan) */}
+      {/* konten */}
       <section className="space-y-16 mb-3">
-        {/* rincian keanggotaan */}
+        {/* rincian menu keanggotaan */}
         <div className="relative max-w-6xl mx-auto px-4 space-y-10">
           <div className="max-w-6xl mx-auto px-4 grid grid-cols-2 gap-8 leading-tight">
+            {/* gambar menu rincian */}
             <div className="relative">
               <img
                 src="image 1.png"
                 alt=""
-                className="flex rounded-xl shadow-md  object-cover overflow-hidden w-full h-full"
+                className="flex rounded-xl shadow-md  object-cover overflow-hidden w-full h-full"
               />
             </div>
+            {/* text menu rincian */}
             <div>
               <h2 className="text-4xl max-w-lg font-semibold mb-3">
                 {t("rincian_judul")}{" "}
@@ -132,15 +163,17 @@ export default function Anggota1({ setActivePage }) {
             </div>
           </div>
         </div>
+
         {/* jenis keanggotaan */}
         <div
           id="jenis_keanggotaan"
           className="relative max-w-6xl mx-auto px-4 space-y-5"
         >
           <div className="flex items-center justify-center max-w-screen">
+            {/* text menu jenis keanggotaan */}
             <div className="max-w-6xl text-center leading-tight space-y-3">
               <h2 className="text-4xl max-w-2xl font-semibold mx-auto">
-                {t("jenis_judul")} <br /> {t("jenis_judul_perusahaan")}{" "}
+                {t("jenis_judul")}
               </h2>
               <p className="text-gray-600 max-w-lg mx-auto">
                 {t("jenis_deskripsi")}
@@ -148,6 +181,8 @@ export default function Anggota1({ setActivePage }) {
             </div>
           </div>
           <div className="grid grid-cols-3 gap-4">
+            {/* card menu jenis keanggotaan */}
+            {/* card 1 */}
             <div className="relative">
               <img
                 src="image 10.jpg"
@@ -158,12 +193,15 @@ export default function Anggota1({ setActivePage }) {
                 <h2 className="font-semibold text-xl">
                   {t("kartu_konsultasi_judul")}{" "}
                 </h2>
-                <p>{t("kartu_konsultasi_deskripsi")}</p>
+                <p className="hidden md:block">
+                  {t("kartu_konsultasi_deskripsi")}
+                </p>
               </div>
             </div>
+            {/* card 2 */}
             <div className="relative">
               <img
-                src="image 12.jpg"
+                src="image 10.jpg"
                 className="overflow-hidden w-full h-80 md:h-48 lg:h-80 object-cover rounded-2xl z-0 brightness-50"
                 alt=""
               />
@@ -171,12 +209,15 @@ export default function Anggota1({ setActivePage }) {
                 <h2 className="font-semibold text-xl">
                   {t("kartu_konsultasi_judul")}{" "}
                 </h2>
-                <p>{t("kartu_konsultasi_deskripsi")}</p>
+                <p className="hidden md:block">
+                  {t("kartu_konsultasi_deskripsi")}
+                </p>
               </div>
             </div>
+            {/* card 3 */}
             <div className="relative">
               <img
-                src="image 11.jpg"
+                src="image 10.jpg"
                 className="overflow-hidden w-full h-80 md:h-48 lg:h-80 object-cover rounded-2xl z-0 brightness-50"
                 alt=""
               />
@@ -184,24 +225,28 @@ export default function Anggota1({ setActivePage }) {
                 <h2 className="font-semibold text-xl">
                   {t("kartu_konsultasi_judul")}{" "}
                 </h2>
-                <p>{t("kartu_konsultasi_deskripsi")}</p>
+                <p className="hidden md:block">
+                  {t("kartu_konsultasi_deskripsi")}
+                </p>
               </div>
             </div>
           </div>
         </div>
+
         {/* skema keanggotaan */}
         <div className="relative max-w-6xl mx-auto px-4 space-y-10">
+          {/* text skema keanggotaan */}
           <div className="flex items-center justify-center max-w-screen">
             <div className="max-w-6xl text-center leading-tight space-y-3">
               <h2 className="text-4xl max-w-2xl font-semibold mx-auto">
-                {t("skema_judul")} <br />
-                {t("jenis_judul_perusahaan")}{" "}
+                {t("skema_judul")}
               </h2>
               <p className="text-gray-600 max-w-lg mx-auto">
                 {t("skema_deskripsi")}
               </p>
             </div>
           </div>
+          {/* gambar skema keanggotaan */}
           <div>
             <img
               src="image 13.jpg"
@@ -211,13 +256,13 @@ export default function Anggota1({ setActivePage }) {
           </div>
         </div>
 
-        {/* Syarat dan Ketentuan Keanggotaan (Tabel) */}
+        {/* syarat dan ketentuan keanggotaan (tabel) */}
         <div className="relative max-w-6xl mx-auto px-4 space-y-10">
           <div className="flex items-center justify-center max-w-screen">
+            {/* text menu syarat dan ketentuan keanggotaan */}
             <div className="max-w-6xl text-center leading-tight space-y-3">
               <h2 className="text-4xl max-w-2xl font-semibold mx-auto">
-                {t("tabel_syarat_judul")} <br />
-                {t("jenis_judul_perusahaan")}{" "}
+                {t("tabel_syarat_judul")}
               </h2>
               <p className="text-gray-600 max-w-lg mx-auto">
                 {t("tabel_deskripsi")}
@@ -227,6 +272,7 @@ export default function Anggota1({ setActivePage }) {
           <div>
             <div className="border border-gray-300 rounded-lg">
               <table className="table-fixed w-full rounded-lg overflow-hidden">
+                {/* baris header menu syarat dan ketentuan keanggotaan */}
                 <thead className="bg-gray-50 text-xl">
                   <tr>
                     <th className="px-4 py-5 text-center">
@@ -240,6 +286,7 @@ export default function Anggota1({ setActivePage }) {
                     </th>
                   </tr>
                 </thead>
+                {/* baris konten menu syarat dan ketentuan keanggotaan */}
                 <tbody>
                   <tr className="bg-blue-100 px-4 py-5 text-start">
                     <td className="px-4 py-5 text-start">
@@ -314,6 +361,7 @@ export default function Anggota1({ setActivePage }) {
           <div>
             <div className="border border-gray-300 rounded-lg">
               <table className="table-fixed w-full rounded-lg overflow-hidden">
+                {/* bsris header menu syarat dan ketentuan keanggotaan */}
                 <thead className="bg-gray-50 text-xl">
                   <tr>
                     <th className="px-4 py-5 text-center">
@@ -327,6 +375,7 @@ export default function Anggota1({ setActivePage }) {
                     </th>
                   </tr>
                 </thead>
+                {/* bsris konten menu syarat dan ketentuan keanggotaan */}
                 <tbody>
                   <tr className="bg-blue-100 px-4 py-5 text-start">
                     <td className="px-4 py-5 text-start">
@@ -385,7 +434,9 @@ export default function Anggota1({ setActivePage }) {
             </p>
           </div>
         </div>
+        <CTASection handleNavigation={handleNavigation} />
       </section>
     </div>
   );
 }
+
