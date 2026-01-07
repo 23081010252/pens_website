@@ -1,10 +1,21 @@
+/**
+ * komponen footer utama untuk navigasi bawah dan informasi perusahaan.
+ * menampilkan logo, tagline, kontak media sosial, daftar layanan, dan lokasi map.
+ * * @component
+ * @param {object} props - properti komponen.
+ * @param {function} props.setActivePage - fungsi setter untuk mengatur state halaman aktif.
+ */
+
 import React from "react";
-import { useTranslation } from "react-i18next"; // import useTranslation dari i18next untuk menyediakan pustaka bahasa
+import { useTranslation } from "react-i18next";
 
 export default function Footer({ setActivePage }) {
-  const { t } = useTranslation("footer"); // menerima pustaka dari namespace "footer" di i18next melalui fungsi t (translate)
+  const { t } = useTranslation("footer");
 
-  //fungsi handleNavigation untuk menjalankan navigasi
+  /**
+   * menangani navigasi internal saat link diklik.
+   * mencegah reload halaman default dan memperbarui state halaman aktif.
+   */
   const handleNavigation = (e, pageKey) => {
     e.preventDefault();
     if (setActivePage) {
@@ -16,18 +27,21 @@ export default function Footer({ setActivePage }) {
     <footer className="bg-white shadow-[0_-4px_10px_rgba(0,0,0,0.1)] ">
       <div className="grid md:grid-cols-2 max-w-6xl mx-auto px-6 py-10 gap-10 md:gap-36">
         <div>
+          {/** logo perusahaan */}
           <img src="image 5.png" alt="Logo" className="h-10 mb-3" />
+
+          {/** tagline perusahaan dari namespace i18n */}
           <p className="max-w-sm text-gray-700 border-b border-gray-200 pb-2 mb-5">
-            {t("tagline")} {/* menggunakan key dari namespace footer */}
+            {t("tagline")}
           </p>
 
-          {/* kontak narahubung perusahaan */}
+          {/** daftar kontak media sosial dan email */}
           <div className="flex gap-5">
             <h4 className="font-bold mb-3">{t("judul_kontak")}</h4>{" "}
             <ul className="space-y-2 text-gray-800">
               <li>
                 <a
-                  href="https://wa.me/08123456789?text=Halo%2C%20saya%20tertarik%20dengan%20layanan%20ekspor%20Anda."
+                  href="https://wa.me/6281515272829?text=Halo%20admin%2C%20saya%20ingin%20bertanya%20mengenai%20layanan%20ekspor"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-gray-950 hover:font-bold"
@@ -37,7 +51,7 @@ export default function Footer({ setActivePage }) {
               </li>
               <li>
                 <a
-                  href="https://www.instagram.com/USERNAME_INSTAGRAM_ANDA"
+                  href="https://www.instagram.com/pegiatekspor"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-gray-950 hover:font-bold"
@@ -47,21 +61,19 @@ export default function Footer({ setActivePage }) {
               </li>
               <li>
                 <a
-                  href="https://www.linkedin.com/company/NAMA_PERUSAHAAN_ANDA"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:pegiatekspornusantara@gmail.com"
                   className="hover:text-gray-950 hover:font-bold"
                 >
-                  Linkedln
+                  Email
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* informasi layanan perusahaan */}
         <div className="space-y-10">
           <div className="grid grid-cols-2">
+            {/** kolom navigasi layanan */}
             <div>
               <h4 className="font-bold mb-3">{t("judul_layanan")}</h4>{" "}
               <ul className="space-y-2 text-gray-700">
@@ -122,6 +134,7 @@ export default function Footer({ setActivePage }) {
               </ul>
             </div>
 
+            {/** kolom informasi tambahan */}
             <div>
               <h4 className="font-bold mb-3">{t("judul_informasi")}</h4>{" "}
               <ul className="space-y-2 text-gray-700">
@@ -147,7 +160,7 @@ export default function Footer({ setActivePage }) {
             </div>
           </div>
 
-          {/* informasi alamat perusahaan */}
+          {/** bagian alamat dan peta lokasi (google maps embed) */}
           <div className="space-y-5">
             <div>
               <h4 className="font-bold mb-3">{t("judul_lokasi")}</h4>
@@ -155,8 +168,9 @@ export default function Footer({ setActivePage }) {
             </div>
 
             <div className="rounded-xl overflow-hidden shadow-sm w-80 h-40">
+              {/** iframe dengan url embed google maps yang valid */}
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.3812347380575!2d110.41433027477557!3d-7.853345678194411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7a57b645abcb1b%3A0x6c2e42c7b7b7279b!2sKantor%20Perusahaan%20Contoh!5e0!3m2!1sid!2sid!4v1696504812345!5m2!1sid!2sid" // Pertahankan ini atau ganti dengan embed yang benar
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126646.20961858547!2d112.6302816353955!3d-7.275972911224859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbf838184353%3A0x674330f80735414d!2sSurabaya%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
