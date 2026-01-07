@@ -170,7 +170,7 @@ export default function Footer({ setActivePage }) {
             <div className="rounded-xl overflow-hidden shadow-sm w-80 h-40">
               {/** iframe dengan url embed google maps yang valid */}
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126646.20961858547!2d112.6302816353955!3d-7.275972911224859!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd7fbf838184353%3A0x674330f80735414d!2sSurabaya%2C%20Jawa%20Timur!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.000000000000!2d112.7323556!3d-7.2401184!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd2453b84ac89c7%3A0x2a45776471487757!2sJl.%20Indrapura%20No.32%20A%2C%20Krembangan%20Sel.%2C%20Kec.%20Krembangan%2C%20Surabaya!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
